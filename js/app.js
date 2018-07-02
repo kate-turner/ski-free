@@ -28,7 +28,14 @@ class Obstacle {
 		this.yCoordinate = 9; 
 		$(`.game-square-${this.xCoordinate}-9`).addClass('obstacle');
 	}
-				
+	moveUp(){
+		$(`.game-square-${this.xCoordinate}-${this.yCoordinate}`).removeClass('obstacle')
+		this.yCoordinate--;
+		$(`.game-square-${this.xCoordinate}-${this.yCoordinate}`).addClass('obstacle')
+		setTimeout(()=>{
+		this.moveUp()
+		}, 1000)
+	}
 }
 
 
@@ -63,6 +70,12 @@ $(document).keydown(function(e){
 })
 
 const tree = new Obstacle();
+tree.moveUp();
+// tree.moveUp();
+// tree.moveUp();
+// tree.moveUp();
+// tree.moveUp();
+
 console.log(tree.xCoordinate);
 
 
