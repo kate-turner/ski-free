@@ -20,15 +20,16 @@ const skier = {
 		}
 	}
 }
-// const obstacles = [],
-// const obstacleNumber = 1;
-class Obstacle {
-	constructor(xCoordinate){
-		this.xCoordinate = xCoordinate;
-		this.yCoordinate = 9;
-	}
-}
+// const obstacles = [];
 
+class Obstacle {
+	constructor(){
+		this.xCoordinate = Math.floor(Math.random() * (11));
+		this.yCoordinate = 9; 
+		$(`.game-square-${this.xCoordinate}-9`).addClass('obstacle');
+	}
+				
+}
 
 
 const gameBoard = [ [0,0,0,0,0,0,0,0,0,0,0],
@@ -61,6 +62,7 @@ $(document).keydown(function(e){
 	}	
 })
 
+const tree = new Obstacle();
+console.log(tree.xCoordinate);
 
 
-$('.game-square-2-9').addClass('Obstacle');
