@@ -1,14 +1,18 @@
 .game-board {
 	background-color: pink;
 }
-/*body {
-	background-color: orange;
-}*/
+
 .game-square {
-	background-color: pink;
+	background-color: grey;
 	width: 50px;
 	height: 50px;
 	margin: 3px;
 	display: inline-block;
-
+}
+.skier {
+	background-image: url("../images/retroskier.png");
+	background-size: cover;
+}
+.Obstacle {
+	background-color: black;
 }
