@@ -13,6 +13,9 @@
 	background-image: url("../images/retroskier.png");
 	background-size: cover;
 }
-.obstacle {
+.tree {
+	background-color: green;
+}
+.rock {
 	background-color: black;
 }
