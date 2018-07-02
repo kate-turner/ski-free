@@ -4,7 +4,7 @@ const skier = {
 	lives: 3,
 	xCoordinate: 5,
 	moveLeft(){
-		if(this.xCoordinate > 1){
+		if(this.xCoordinate > 0){
 			console.log("ROOM TO MOVE LEFT")
 			$(`.game-square-${this.xCoordinate}-1`).removeClass('skier');
 			this.xCoordinate -= 1;
@@ -20,14 +20,11 @@ const skier = {
 		}
 	}
 }
-
-
 class Obstacle {
 	constructor(type){
 		this.type = type;
 		this.xCoordinate = Math.floor(Math.random() * (11));
 		this.yCoordinate = 9; 
-		// $(`.game-square-${this.xCoordinate}-9`).addClass(this.type);
 	}
 	renderObstacle(){
 		$(`.game-square-${this.xCoordinate}-9`).addClass(this.type);
@@ -36,11 +33,18 @@ class Obstacle {
 		$(`.game-square-${this.xCoordinate}-${this.yCoordinate}`).removeClass(this.type)
 		this.yCoordinate--;
 		$(`.game-square-${this.xCoordinate}-${this.yCoordinate}`).addClass(this.type)
+		this.detectCollision()
 		setTimeout(()=>{
 		this.moveUp()
 		}, 1000)
 	}
-
+	detectCollision(){
+		const collisionSquare = $(`.game-square-${this.xCoordinate}-${this.yCoordinate}`)
+		if(collisionSquare.hasClass('skier') == true){
+			console.log("COLLISION!");
+		}
+		
+		}
 }
 
 
@@ -77,7 +81,7 @@ $(document).keydown(function(e){
 const treeInterval = setInterval(function() {
 	const tree = new Obstacle("tree");
 	tree.renderObstacle();
-	tree.moveUp();
+	tree.moveUp();	
 }, 3000);
 
 const rockInterval = setInterval(function() {
@@ -86,5 +90,6 @@ const rockInterval = setInterval(function() {
 	rock.moveUp();
 }, 3000);
 
+	
 
 
