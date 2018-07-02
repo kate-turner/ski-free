@@ -20,15 +20,17 @@ const skier = {
 		}
 	}
 }
-// const obstacles = [];
+
 
 class Obstacle {
 	constructor(type){
 		this.type = type;
 		this.xCoordinate = Math.floor(Math.random() * (11));
 		this.yCoordinate = 9; 
+		// $(`.game-square-${this.xCoordinate}-9`).addClass(this.type);
+	}
+	renderObstacle(){
 		$(`.game-square-${this.xCoordinate}-9`).addClass(this.type);
-		// $(`.game-square-${this.xCoordinate}-9`).addClass('obstacle')
 	}
 	moveUp(){
 		$(`.game-square-${this.xCoordinate}-${this.yCoordinate}`).removeClass(this.type)
@@ -38,6 +40,7 @@ class Obstacle {
 		this.moveUp()
 		}, 1000)
 	}
+
 }
 
 
@@ -71,8 +74,17 @@ $(document).keydown(function(e){
 	}	
 })
 
-const tree = new Obstacle('tree');
-tree.moveUp();
+const treeInterval = setInterval(function() {
+	const tree = new Obstacle("tree");
+	tree.renderObstacle();
+	tree.moveUp();
+}, 3000);
 
-const rock = new Obstacle('rock');
-rock.moveUp();
+const rockInterval = setInterval(function() {
+	const rock = new Obstacle("rock");
+	rock.renderObstacle();
+	rock.moveUp();
+}, 3000);
+
+
+
