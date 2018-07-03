@@ -41,9 +41,10 @@ class Obstacle {
 	detectCollision(){
 		const collisionSquare = $(`.game-square-${this.xCoordinate}-${this.yCoordinate}`)
 		if(collisionSquare.hasClass('skier') == true){
+			collisionSquare.removeClass('skier');
+			collisionSquare.addClass('skierDown');
 			console.log("COLLISION!");
-		}
-		
+			}
 		}
 }
 
