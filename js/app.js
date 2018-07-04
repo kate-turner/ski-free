@@ -1,8 +1,12 @@
-
-
-const skier = {
-	lives: 3,
+let seconds = 0; 
+let minutes = 0;
+let paused = false;
+let timePasses = null;
+ 
+ const skier = {
+	crashlives: 0,
 	xCoordinate: 5,
+	yCoordinate: 1,
 	moveLeft(){
 		if(this.xCoordinate > 0){
 			console.log("ROOM TO MOVE LEFT")
@@ -18,7 +22,15 @@ const skier = {
 			this.xCoordinate += 1;
 			$(`.game-square-${this.xCoordinate}-1`).addClass('skier')
 		}
-	}
+	},
+	// moveDown(){
+	// 	if(this.yCoordinate < 8){
+	// 		console.log("ROOM TO MOVE DOWN")
+	// 		$(`.game-square-${this.xCoordinate}-${this.yCoordinate}`).removeClass('skier')
+	// 		this.yCoordinate ;
+	// 		$(`.game-square-${this.xCoordinate}-${this.yCoordinate}`).addClass('skier')
+	// 	}
+	// }
 }
 class Obstacle {
 	constructor(type){
@@ -74,22 +86,66 @@ $(document).keydown(function(e){
 	let keyPressed = e.which;
 	if(keyPressed == 37){
 		skier.moveLeft();
-	}	else if(keyPressed == 39){
+	}else if(keyPressed == 39){
 		skier.moveRight();
-	}	
+	}else if(keyPressed == 40){
+		skier.moveDown();
+	}
 })
 
-const treeInterval = setInterval(function() {
+
+$('#start').on('click', () => {
+	obstaclesMove();
+	startTimer(); 
+	$('#start').hide();
+});
+	
+
+
+function startTimer () {
+	paused == false;
+	timePasses = setInterval(function() {
+		seconds +=1;
+		if(seconds % 60 == 0){
+			minutes+= 1;
+			seconds = 0;
+		}
+		$('#timer').text(`${minutes}:${seconds}`)
+		}, 1000)
+	}
+
+
+
+function obstaclesMove () {
+	
+	const treeInterval = setInterval(function() {
 	const tree = new Obstacle("tree");
 	tree.renderObstacle();
 	tree.moveUp();	
-}, 3000);
+	}, 3000);
 
-const rockInterval = setInterval(function() {
+	const rockInterval = setInterval(function() {
 	const rock = new Obstacle("rock");
 	rock.renderObstacle();
 	rock.moveUp();
-}, 3000);
+	}, 3000);
+};
+
+$('#stoptimer').click(function(){
+   clearInterval(timePasses);
+   clearInterval(obstaclesMove);
+   paused == true;
+})
+
+  
+ 
+
+
+  
+  
+  
+
+
 
 	
 
