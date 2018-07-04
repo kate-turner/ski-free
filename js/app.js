@@ -4,7 +4,7 @@ let paused = false;
 let timePasses = null;
  
  const skier = {
-	crashlives: 0,
+	crashlives: 3,
 	xCoordinate: 5,
 	yCoordinate: 1,
 	moveLeft(){
@@ -56,11 +56,17 @@ class Obstacle {
 			collisionSquare.removeClass('skier');
 			collisionSquare.addClass('skierDown');
 			console.log("COLLISION!");
+			if(skier.crashlives > 0){
+				skier.crashlives -=1;
+			$("span#crash-lives").text(skier.crashlives);
+			};
+			
 			setTimeout(()=>{
 				collisionSquare.removeClass('skierDown');
 				collisionSquare.addClass('skier');
 			}, 200)
 		}
+
 	}
 }
 
