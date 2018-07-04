@@ -56,8 +56,12 @@ class Obstacle {
 			collisionSquare.removeClass('skier');
 			collisionSquare.addClass('skierDown');
 			console.log("COLLISION!");
-			}
+			setTimeout(()=>{
+				collisionSquare.removeClass('skierDown');
+				collisionSquare.addClass('skier');
+			}, 200)
 		}
+	}
 }
 
 

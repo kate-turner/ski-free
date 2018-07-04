@@ -6,16 +6,16 @@
     flex-flow: column nowrap;
     height: 760px;
     width: 720px;
-
 }
+
 .header {
 	background-image: linear-gradient(420deg, orange, pink, blue);
 	display: relative;
 	width: 708px;
 	height: 90px;
-	 justify-content: center;
-    
+	justify-content: center;
 }
+
 h1 {
 	font-family: 'Permanent Marker', cursive;
 	letter-spacing: 5px;
@@ -23,14 +23,26 @@ h1 {
 
 	}
 
+/*---- Stats styling ----*/
+
 .stats {
+	font-family: 'Permanent Marker', cursive;
 	display: block;
-	flex-direction: column;
-	justify-content: flex-end;
 	border: 2px solid black;
 	background-color: orange;
-	margin-left: 400px;
+	margin-left: 500px;
+	align-self: center;
 }
+#start {
+	height: 50px;
+	width: 75px;
+	margin-top: 20px;
+}
+
+#timer {
+	
+}
+
 /*---- Game Board styling ----*/
 
 .game-board {
