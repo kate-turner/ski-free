@@ -5,7 +5,7 @@ let timePasses = null;
 
 
  const skier = {
-	crashlives: 1,
+	crashlives: 3,
 	xCoordinate: 5,
 	yCoordinate: 1,
 
@@ -35,9 +35,24 @@ let timePasses = null;
 			this.xCoordinate += 1;
 			$(`.game-square-${this.xCoordinate}-1`).addClass('skierRight');
 		}
+	},
+	moveDown(){
+	
+		function animateUp() {
+			$(".skier").animate({top: "+=4"}, 6, function() {
+			animateDown();
+			});
+		}
+
+		function animateDown(){
+			$(".skier").animate({top: "-=4"}, 6, function() {
+			setTimeout(animateUp, 6);
+			});
+		}
+
+		setTimeout(animateUp, 6);
 	}
 }
-	
 
 class Obstacle {
 	constructor(type){
@@ -115,6 +130,7 @@ $(document).keydown(function(e){
 		skier.moveRight();
 	}else if(keyPressed == 40){
 		skier.moveDown();
+		console.log("skier moves down");
 	}
 })
 
@@ -179,21 +195,6 @@ function gameOver () {
 
 
 
-// ---- RESET FOR NEXT LEVEL ATTEMPT
-// function reset () {
-// 	$( document ).ready(function() {
-// 	$('#start').hide();
-// 	// startGame(); 
-// 	});
-// };
-
-
-// ----- PAUSE ATTEMPT
-// $('#stoptimer').click(function(){
-//    clearInterval(timePasses);
-//    clearInterval(obstaclesMove);
-//    paused == true;
-// })
 
 
 

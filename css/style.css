@@ -90,6 +90,7 @@ h1 {
 	background-image: url("../images/retroskier.png");
 	background-size: 80%;
 	background-repeat: no-repeat;
+	position: relative;
 }
 .tree {
 	background-image: url("../images/tree.png");
