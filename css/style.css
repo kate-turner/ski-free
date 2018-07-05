@@ -78,7 +78,17 @@ h1 {
 	background-repeat: no-repeat;
 }
 .skierDown {
-	background-color: red;
+	background-image: url("../images/retroskier.png");
+	background-size: 80%;
+	background-repeat: no-repeat;
+	transform: rotate(180deg);
+	
+}
+.skierRight {
+	background-image: url("../images/retroskier.png");
+	background-size: 80%;
+	background-repeat: no-repeat;
+	transform: scaleX(-1);
 }
 
 

@@ -7,22 +7,43 @@ let timePasses = null;
 	crashlives: 3,
 	xCoordinate: 5,
 	yCoordinate: 1,
+
+	
+
+
 	moveLeft(){
-		if(this.xCoordinate > 0){
+		if(this.xCoordinate > 0 && $(`.game-square-${this.xCoordinate}-1`).hasClass('skierRight')){
 			console.log("ROOM TO MOVE LEFT")
+			$(`.game-square-${this.xCoordinate}-1`).removeClass('skierRight');
+			this.xCoordinate -= 1;
+			$(`.game-square-${this.xCoordinate}-1`).addClass('skier');
+		}
+		else if(this.xCoordinate > 0 && $(`.game-square-${this.xCoordinate}-1`).hasClass('skier')){
 			$(`.game-square-${this.xCoordinate}-1`).removeClass('skier');
 			this.xCoordinate -= 1;
-			$(`.game-square-${this.xCoordinate}-1`).addClass('skier')
+			$(`.game-square-${this.xCoordinate}-1`).addClass('skier');
 		}
 	},
 	moveRight(){
-		if(this.xCoordinate < 10){
+		if(this.xCoordinate < 10 && $(`.game-square-${this.xCoordinate}-1`).hasClass('skier')){
 			console.log("ROOM TO MOVE RIGHT")
 			$(`.game-square-${this.xCoordinate}-1`).removeClass('skier');
 			this.xCoordinate += 1;
-			$(`.game-square-${this.xCoordinate}-1`).addClass('skier')
+			$(`.game-square-${this.xCoordinate}-1`).addClass('skierRight')
+		}
+		else if(this.xCoordinate < 10 && $(`.game-square-${this.xCoordinate}-1`).hasClass('skierRight')){
+			$(`.game-square-${this.xCoordinate}-1`).removeClass('skierRight');
+			this.xCoordinate += 1;
+			$(`.game-square-${this.xCoordinate}-1`).addClass('skierRight');
 		}
 	},
+
+			
+			
+
+
+
+
 	// moveDown(){
 	// 	if(this.yCoordinate < 8){
 	// 		console.log("ROOM TO MOVE DOWN")
@@ -141,11 +162,25 @@ function obstaclesMove () {
 	}, 3000);
 };
 
-$('#stoptimer').click(function(){
-   clearInterval(timePasses);
-   clearInterval(obstaclesMove);
-   paused == true;
-})
+// $('#stoptimer').click(function(){
+//    clearInterval(timePasses);
+//    clearInterval(obstaclesMove);
+//    paused == true;
+// })
+
+function animateRight() {
+	$(".skier").animate({left: "+=100"}, 2000, function() {
+		animateLeft();
+	});
+}
+
+function animateLeft(){
+	$(".skier").animate({left: "-=100"}, 2000, function () {
+		setTimeout(animateRight, 50);
+	});
+}
+
+setTimeout(animateRight, 50);
 
   
  
