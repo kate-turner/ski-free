@@ -2,15 +2,14 @@ let seconds = 0;
 let minutes = 0;
 let paused = false;
 let timePasses = null;
- 
+
+
  const skier = {
-	crashlives: 3,
+	crashlives: 1,
 	xCoordinate: 5,
 	yCoordinate: 1,
 
 	
-
-
 	moveLeft(){
 		if(this.xCoordinate > 0 && $(`.game-square-${this.xCoordinate}-1`).hasClass('skierRight')){
 			console.log("ROOM TO MOVE LEFT")
@@ -36,23 +35,10 @@ let timePasses = null;
 			this.xCoordinate += 1;
 			$(`.game-square-${this.xCoordinate}-1`).addClass('skierRight');
 		}
-	},
-
-			
-			
-
-
-
-
-	// moveDown(){
-	// 	if(this.yCoordinate < 8){
-	// 		console.log("ROOM TO MOVE DOWN")
-	// 		$(`.game-square-${this.xCoordinate}-${this.yCoordinate}`).removeClass('skier')
-	// 		this.yCoordinate ;
-	// 		$(`.game-square-${this.xCoordinate}-${this.yCoordinate}`).addClass('skier')
-	// 	}
-	// }
+	}
 }
+	
+
 class Obstacle {
 	constructor(type){
 		this.type = type;
@@ -73,24 +59,31 @@ class Obstacle {
 	}
 	detectCollision(){
 		const collisionSquare = $(`.game-square-${this.xCoordinate}-${this.yCoordinate}`)
-		if(collisionSquare.hasClass('skier') == true){
+		if(collisionSquare.hasClass('skier') || collisionSquare.hasClass('skierRight')){
 			collisionSquare.removeClass('skier');
+			collisionSquare.removeClass('skierRight');
+
 			collisionSquare.addClass('skierDown');
 			console.log("COLLISION!");
-			if(skier.crashlives > 0){
-				skier.crashlives -=1;
-			$("span#crash-lives").text(skier.crashlives);
-			};
-			
+
+
 			setTimeout(()=>{
 				collisionSquare.removeClass('skierDown');
 				collisionSquare.addClass('skier');
-			}, 200)
+			}, 200);
+
+
+			if(skier.crashlives > 0){
+				skier.crashlives -=1;
+				$("span#crash-lives").text(skier.crashlives);
+			}
+			else {
+				gameOver()
+			}
 		}
-
 	}
-}
-
+} 
+ 
 
 const gameBoard = [ [0,0,0,0,0,0,0,0,0,0,0],
 					[0,0,0,0,0,0,0,0,0,0,0],
@@ -112,6 +105,7 @@ for(let i = 0; i < gameBoard.length; i++) {
 		$(`.game-row-${i}`).append(`<div class="game-square game-square-${x}-${i}"></div>`)
 		}
 }
+
 $('.game-square-5-1').addClass('skier');
 $(document).keydown(function(e){
 	let keyPressed = e.which;
@@ -126,13 +120,23 @@ $(document).keydown(function(e){
 
 
 $('#start').on('click', () => {
-	obstaclesMove();
-	startTimer(); 
+	startGame()
 	$('#start').hide();
 });
+
+
+function startGame () {
+	obstaclesMove();
+	startTimer(); 
+}
+
+// function reset () {
 	
-
-
+// 	console.log("reset-start game button works");
+// 	$('#reset').hide();
+// 	startGame(); 
+// };
+	
 function startTimer () {
 	paused == false;
 	timePasses = setInterval(function() {
@@ -144,7 +148,6 @@ function startTimer () {
 		$('#timer').text(`${minutes}:${seconds}`)
 		}, 1000)
 	}
-
 
 
 function obstaclesMove () {
@@ -162,25 +165,42 @@ function obstaclesMove () {
 	}, 3000);
 };
 
+function gameOver () {
+	if(skier.crashlives == 0){
+		$('.game-board').empty();
+		clearInterval(timePasses);
+		$('.game-board').append("<button type='reset' class='btn btn-success' id='reset'>Start Over</button>");
+		$('#reset').on('click', () => {
+			location.reload()
+			console.log("reset works");
+		});
+	}
+}
+
+
+// ----- A
 // $('#stoptimer').click(function(){
 //    clearInterval(timePasses);
 //    clearInterval(obstaclesMove);
 //    paused == true;
 // })
 
-function animateRight() {
-	$(".skier").animate({left: "+=100"}, 2000, function() {
-		animateLeft();
-	});
-}
 
-function animateLeft(){
-	$(".skier").animate({left: "-=100"}, 2000, function () {
-		setTimeout(animateRight, 50);
-	});
-}
 
-setTimeout(animateRight, 50);
+// ---- ANIMATION ATTEMPT RIPPED FROM TOMAGOTCHI
+// function animateRight() {
+// 	$(".skier").animate({left: "+=100"}, 2000, function() {
+// 		animateLeft();
+// 	});
+// }
+
+// function animateLeft(){
+// 	$(".skier").animate({left: "-=100"}, 2000, function () {
+// 		setTimeout(animateRight, 50);
+// 	});
+// }
+
+// setTimeout(animateRight, 50);
 
   
  
