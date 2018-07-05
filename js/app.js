@@ -120,8 +120,9 @@ $(document).keydown(function(e){
 
 
 $('#start').on('click', () => {
-	startGame()
-	$('#start').hide();
+	startGame();
+	$('#start').remove();
+	
 });
 
 
@@ -130,13 +131,6 @@ function startGame () {
 	startTimer(); 
 }
 
-// function reset () {
-	
-// 	console.log("reset-start game button works");
-// 	$('#reset').hide();
-// 	startGame(); 
-// };
-	
 function startTimer () {
 	paused == false;
 	timePasses = setInterval(function() {
@@ -169,16 +163,32 @@ function gameOver () {
 	if(skier.crashlives == 0){
 		$('.game-board').empty();
 		clearInterval(timePasses);
-		$('.game-board').append("<button type='reset' class='btn btn-success' id='reset'>Start Over</button>");
+		$('.game-board').append("<h1 class='gameOver'>Game Over</h1>");
+		$('.stats').append("<button type='reset' class='btn btn-success' id='reset'>Start Over</button>");
 		$('#reset').on('click', () => {
-			location.reload()
-			console.log("reset works");
+			location.reload();
+			// reset();
 		});
 	}
 }
 
 
-// ----- A
+
+
+
+
+
+
+// ---- RESET FOR NEXT LEVEL ATTEMPT
+// function reset () {
+// 	$( document ).ready(function() {
+// 	$('#start').hide();
+// 	// startGame(); 
+// 	});
+// };
+
+
+// ----- PAUSE ATTEMPT
 // $('#stoptimer').click(function(){
 //    clearInterval(timePasses);
 //    clearInterval(obstaclesMove);
