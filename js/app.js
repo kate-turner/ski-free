@@ -2,7 +2,6 @@ let seconds = 0;
 let minutes = 0;
 let paused = false;
 let timePasses = null;
-// const collisionSquare = $(`.game-square-${this.xCoordinate}-${this.yCoordinate}`);
 
 
  const skier = {
@@ -10,7 +9,6 @@ let timePasses = null;
 	xCoordinate: 5,
 	yCoordinate: 1,
 
-	
 	moveLeft(){
 		if(this.xCoordinate > 0 && $(`.game-square-${this.xCoordinate}-1`).hasClass('skierRight')){
 			console.log("ROOM TO MOVE LEFT")
@@ -37,22 +35,22 @@ let timePasses = null;
 			$(`.game-square-${this.xCoordinate}-1`).addClass('skierRight');
 		}
 	},
-	moveDown(){
+	// moveDown(){
 	
-		function animateUp() {
-			$(".skier").animate({top: "+=4"}, 6, function() {
-			animateDown();
-			});
-		}
+	// 	function animateUp() {
+	// 		$(".skier").animate({top: "+=4"}, 6, function() {
+	// 		animateDown();
+	// 		});
+	// 	}
 
-		function animateDown(){
-			$(".skier").animate({top: "-=4"}, 6, function() {
-			setTimeout(animateUp, 6);
-			});
-		}
+	// 	function animateDown(){
+	// 		$(".skier").animate({top: "-=4"}, 6, function() {
+	// 		setTimeout(animateUp, 6);
+	// 		});
+	// 	}
 
-		setTimeout(animateUp, 6);
-	}
+	// 	setTimeout(animateUp, 6);
+	// }
 }
 
 class Obstacle {
@@ -71,18 +69,15 @@ class Obstacle {
 		this.detectCollision()
 		setTimeout(()=>{
 		this.moveUp()
-		}, 400)
+		}, 300)
 	}
 	detectCollision(){
 		const collisionSquare = $(`.game-square-${this.xCoordinate}-${this.yCoordinate}`)
 		if(collisionSquare.hasClass('skier') || collisionSquare.hasClass('skierRight')){
 			collisionSquare.removeClass('skier');
 			collisionSquare.removeClass('skierRight');
-
 			collisionSquare.addClass('skierDown');
 			console.log("COLLISION!");
-
-
 			setTimeout(()=>{
 				collisionSquare.removeClass('skierDown');
 				collisionSquare.addClass('skier');
@@ -91,8 +86,6 @@ class Obstacle {
 			if(collisionSquare.hasClass('finishLine')){
 				winner();
 			}
-
-
 			if(skier.crashlives > 0){
 				skier.crashlives -=1;
 				$("span#crash-lives").text(skier.crashlives);
@@ -100,12 +93,10 @@ class Obstacle {
 			else {
 				gameOver()
 			}
-
 		}
 	}
 } 
  
-
 const gameBoard = [ [0,0,0,0,0,0,0,0,0,0,0],
 					[0,0,0,0,0,0,0,0,0,0,0],
 					[0,0,0,0,0,0,0,0,0,0,0],
@@ -167,9 +158,7 @@ function startTimer () {
 		if(seconds == 59){
 			finishLine();
 		}
-
-
-		$('#timer').text(`${minutes}:${seconds}`)
+	$('#timer').text(`${minutes}:${seconds}`)
 		}, 1000)
 }
 
@@ -178,7 +167,7 @@ function winner () {
 		clearInterval(timePasses);
 		$('.game-board').addClass("winner");
 		$('.game-board').append("<h1 class='Winner!'>Winner</h1>");
-		$('.stats').append("<button type='reset' class='btn btn-success' id='reset'>RESET</button>");
+		$('.stats').prepend("<button type='reset' class='btn btn-success' id='reset'>RESET</button>");
 		$('#reset').on('click', () => {
 			location.reload();
 		});
@@ -192,7 +181,6 @@ function finishLine () {
 }
 
 function obstaclesMove () {
-	
 	const treeInterval = setInterval(function() {
 	const tree = new Obstacle("tree");
 	tree.renderObstacle();
@@ -211,10 +199,9 @@ function gameOver () {
 		$('.game-board').empty();
 		clearInterval(timePasses);
 		$('.game-board').append("<h1 class='gameOver'>Game Over</h1>");
-		$('.stats').append("<button type='reset' class='btn btn-success' id='reset'>Start Over</button>");
+		$('.stats').prepend("<button type='reset' class='btn btn-success' id='reset'>Start Over</button>");
 		$('#reset').on('click', () => {
 			location.reload();
-			// reset();
 		});
 	}
 }
