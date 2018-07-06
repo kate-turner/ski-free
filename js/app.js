@@ -70,7 +70,7 @@ class Obstacle {
 		this.detectCollision()
 		setTimeout(()=>{
 		this.moveUp()
-		}, 1000)
+		}, 400)
 	}
 	detectCollision(){
 		const collisionSquare = $(`.game-square-${this.xCoordinate}-${this.yCoordinate}`)
@@ -155,9 +155,25 @@ function startTimer () {
 			minutes+= 1;
 			seconds = 0;
 		}
+		if(seconds == 9 || seconds == 29 || seconds == 42){
+			obstaclesMove();
+		}
+		// if(seconds == 36){
+		// 	obstaclesMove();
+		// }
 		$('#timer').text(`${minutes}:${seconds}`)
 		}, 1000)
-	}
+}
+
+// function increaseInterval () {
+// 	// setInterval(function (){
+// 		if(seconds == 12){
+// 			ObstaclesMove()
+// 			console.log(`${seconds}`);
+// 		}
+// 	// }
+// }	
+// increaseInterval();
 
 
 function obstaclesMove () {
@@ -166,7 +182,7 @@ function obstaclesMove () {
 	const tree = new Obstacle("tree");
 	tree.renderObstacle();
 	tree.moveUp();	
-	}, 3000);
+	}, 1000);
 
 	const rockInterval = setInterval(function() {
 	const rock = new Obstacle("rock");
@@ -187,7 +203,6 @@ function gameOver () {
 		});
 	}
 }
-
 
 
 
