@@ -5,7 +5,7 @@
     align-items: center;
     flex-flow: column nowrap;
     height: 760px;
-    width: 720px;
+    width: 730px;
 }
 
 .header {
@@ -14,29 +14,33 @@
 	width: 708px;
 	height: 90px;
 	justify-content: center;
+	border: solid 3px black;
 }
 
 h1 {
+	font-size: 67px;
 	font-family: 'Permanent Marker', cursive;
 	letter-spacing: 5px;
-	margin-top: 20px;
+	margin-top: 17px;
 	justify-content: center;
 	align-self: center;
+
 
 	}
 
 /*---- Stats styling ----*/
 
 .col-sm-3 {
-	border: 3px solid white;
+	/*border: 3px solid green;*/
+	border-radius: 50px;
 	width: 100px;
 	height: 50px;
 	justify-content: center;
 	align-content: center;
-	background: white;
-	background-opacity: .5;
+	background: #87CEFA;
 	margin-top: 15px;
-	flex-grow: 1
+	text-align: center;
+	color: black;
 }
 
 .stats {
@@ -44,7 +48,7 @@ h1 {
 	display: inline-flex;
 	border: 2px solid black;
 	background-color: orange;
-	width: 710px;
+	width: 698px;
 	height: 100px;
 	justify-content: space-around;
 }
@@ -54,7 +58,7 @@ h1 {
 	height: 75px;
 	align-self: center;
 	justify-content: center;
-	flex-grow: 1
+	margin-top: 11px;
 }
 
 #reset {
@@ -62,14 +66,15 @@ h1 {
 	height: 75px;
 	align-self: center;
 	justify-content: center
-	order: 0;
+	margin-top: 10px;
 }
 
 
 /*---- Game Board styling ----*/
 
 .game-board {
-	background-color: rgb(245,245,245);
+	background: linear-gradient(to bottom, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
+	
 	display: flex;
     justify-content: center;
     text-align: center;
@@ -119,6 +124,14 @@ h1 {
 	background-size: cover;
 	background-repeat: no-repeat;
 }
+.winner {
+	
+	background: #FFD700;
+	color: white;
+	justify-content: center;
+	size: 130px;
+}
+
 
 
 

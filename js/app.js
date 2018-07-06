@@ -164,7 +164,7 @@ function startTimer () {
 		if(seconds == 9 || seconds == 29 || seconds == 42){
 			obstaclesMove();
 		}
-		if(seconds == 5){
+		if(seconds == 59){
 			finishLine();
 		}
 
@@ -176,8 +176,9 @@ function startTimer () {
 function winner () {
 		$('.game-board').empty();
 		clearInterval(timePasses);
+		$('.game-board').addClass("winner");
 		$('.game-board').append("<h1 class='Winner!'>Winner</h1>");
-		$('.stats').append("<button type='reset' class='btn btn-success' id='reset'>Start Over</button>");
+		$('.stats').append("<button type='reset' class='btn btn-success' id='reset'>RESET</button>");
 		$('#reset').on('click', () => {
 			location.reload();
 		});
@@ -217,41 +218,3 @@ function gameOver () {
 		});
 	}
 }
-
-
-
-
-
-
-
-
-
-
-// ---- ANIMATION ATTEMPT RIPPED FROM TOMAGOTCHI
-// function animateRight() {
-// 	$(".skier").animate({left: "+=100"}, 2000, function() {
-// 		animateLeft();
-// 	});
-// }
-
-// function animateLeft(){
-// 	$(".skier").animate({left: "-=100"}, 2000, function () {
-// 		setTimeout(animateRight, 50);
-// 	});
-// }
-
-// setTimeout(animateRight, 50);
-
-  
- 
-
-
-  
-  
-  
-
-
-
-	
-
-
