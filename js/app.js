@@ -2,6 +2,7 @@ let seconds = 0;
 let minutes = 0;
 let paused = false;
 let timePasses = null;
+// const collisionSquare = $(`.game-square-${this.xCoordinate}-${this.yCoordinate}`);
 
 
  const skier = {
@@ -86,6 +87,10 @@ class Obstacle {
 				collisionSquare.removeClass('skierDown');
 				collisionSquare.addClass('skier');
 			}, 200);
+			
+			if(collisionSquare.hasClass('finishLine')){
+				winner();
+			}
 
 
 			if(skier.crashlives > 0){
@@ -95,6 +100,7 @@ class Obstacle {
 			else {
 				gameOver()
 			}
+
 		}
 	}
 } 
@@ -158,23 +164,31 @@ function startTimer () {
 		if(seconds == 9 || seconds == 29 || seconds == 42){
 			obstaclesMove();
 		}
-		// if(seconds == 36){
-		// 	obstaclesMove();
-		// }
+		if(seconds == 5){
+			finishLine();
+		}
+
+
 		$('#timer').text(`${minutes}:${seconds}`)
 		}, 1000)
 }
 
-// function increaseInterval () {
-// 	// setInterval(function (){
-// 		if(seconds == 12){
-// 			ObstaclesMove()
-// 			console.log(`${seconds}`);
-// 		}
-// 	// }
-// }	
-// increaseInterval();
+function winner () {
+		$('.game-board').empty();
+		clearInterval(timePasses);
+		$('.game-board').append("<h1 class='Winner!'>Winner</h1>");
+		$('.stats').append("<button type='reset' class='btn btn-success' id='reset'>Start Over</button>");
+		$('#reset').on('click', () => {
+			location.reload();
+		});
+	}
 
+
+function finishLine () {
+	const finishLine = new Obstacle("finishLine")
+	finishLine.renderObstacle();
+	finishLine.moveUp();
+}
 
 function obstaclesMove () {
 	
