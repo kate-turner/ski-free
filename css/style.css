@@ -1,6 +1,6 @@
 
 body {
-	background: #FFDAB9;
+	/*background: #FFDAB9;*/
 }
 
 .container {
@@ -10,14 +10,14 @@ body {
     justify-content: center;
     align-items: center;
     flex-flow: column nowrap;
-    height: 760px;
-    width: 730px;
+    height: 790px;
+    width: 728px;
 }
 
 .header {
 	background-image: linear-gradient(420deg, orange, pink, blue);
 	display: relative;
-	width: 710px;
+	width: 717px;
 	height: 90px;
 	justify-content: center;
 	border-bottom: solid 2px #151515;
@@ -35,14 +35,13 @@ h1 {
 /*---- Stats styling ----*/
 
 .col-sm-3 {
-	
 	border-radius: 50px;
 	width: 100px;
-	height: 50px;
+	height: 80px;
 	justify-content: center;
 	align-content: center;
 	background: #87CEFA;
-	margin-top: 15px;
+	margin-top: 10px;
 	text-align: center;
 	color: black;
 }
@@ -52,7 +51,7 @@ h1 {
 	display: inline-flex;
 	border-top: 2px solid #151515;
 	background-color: orange;
-	width: 710px;
+	width: 717px;
 	height: 100px;
 	justify-content: space-around;
 }
@@ -61,6 +60,7 @@ h1 {
 #reset {
 	width: 120px;
 	height: 75px;
+	display: flex;
 	align-self: center;
 	justify-content: center
 	margin-top: 10px;
@@ -70,14 +70,13 @@ h1 {
 /*---- Game Board styling ----*/
 
 .game-board {
-	background: linear-gradient(to bottom, rgba(242,245,246,1) 0%,rgba(227,234,237,1) 37%,rgba(200,215,220,1) 100%);
+	background: white;
 	display: flex;
     justify-content: center;
     text-align: center;
  	flex-direction: row;
-	/*height: 612px;*/
-	height: 700px;
- 	width: 710px;
+	height: 600px;
+ 	width: 650px;
  }
 
 .game-square {
